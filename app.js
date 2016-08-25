@@ -30,6 +30,9 @@ module.exports = function(app, io, express){
   app.use('/', routes);
   app.use('/users', users);
   
+  //mongo db module to connect app to mongo db using mongoose
+  var db_connect = require('./mongo_connect');
+
   //socket module having all the socket related stuff
   var socket_module = require('./socket_module')(io);
 
