@@ -4,7 +4,9 @@
  * Module dependencies.
  */
 
-var app = require('../app');
+var express = require('express');
+var app = express();
+// var app = require('../app');
 var debug = require('debug')('noti_app:server');
 var http = require('http');
 
@@ -20,12 +22,21 @@ app.set('port', port);
  */
 
 var server = http.createServer(app);
+/* 
+*  creating the socket object here 
+*  and then make the server listens to the pages having the websocket connection 
+*  so we add the listen(server) to the socket object
+*/
+var io = require('socket.io').listen(server);
+var app = require('../app')(app, io, express);
 
 /**
  * Listen on provided port, on all network interfaces.
  */
 
-server.listen(port);
+server.listen(port, function(){
+  console.log('listening on port' + port);
+});
 server.on('error', onError);
 server.on('listening', onListening);
 
