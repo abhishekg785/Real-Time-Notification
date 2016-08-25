@@ -9,9 +9,9 @@
 var NotificationModel = require('./models/notificationModel.js');
 var shared_module = require('./shared_module');
 
-var timeMaxRange = 5,
+var timeMaxRange = 2,
     timeLowRange = 1,
-    timeFactor = 1000;  //to make it for ms
+    timeFactor = 10000;  //to make it for ms
 
 var socket_Functions = {
 
@@ -68,7 +68,6 @@ module.exports = function(io){
 
 		//change the notification seen status to true when the user has seen the notifications
 		socket.on('change notification status', function(){
-			console.log('CHANGING');
 			shared_module.changeNotificationStatus();
 		});
 	});
