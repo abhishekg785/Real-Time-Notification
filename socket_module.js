@@ -3,7 +3,7 @@
 *  abhishekg785@gmail.com
 *  github : abhishekg785
 *
-*  socket_module.js : creates a websocket connection each time a new user connects 
+*  socket_module.js : creates a websocket connection each time a new user connects
 */
 
 var NotificationModel = require('./models/notificationModel.js');
@@ -34,7 +34,7 @@ module.exports = function(io){
 
 		//shared module contains all the general functions in use :) making the code modular
 		shared_module.getUnseenNotifications(function(data){
-			//get the unseen notifications using callback mechanism from the mongo db 
+			//get the unseen notifications using callback mechanism from the mongo db
 			//emit the data
 			io.emit('initialize data', {'unseen_noti_count' : data.length, 'unseen_noti_arr' : data});
 		});

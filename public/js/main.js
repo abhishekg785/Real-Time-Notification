@@ -1,13 +1,15 @@
 /*
-*   abhishek goswami
+*   abhishek goswami (hiro)
 *   abhishekg785@gmail.com
+*   github : abhishekg785
 *
 *   main.js file
 */
 
 (function($, io, d){
 
-    var socket = io.connect();
+    var socket = io.connect(),
+        isVisible = false;
 
     var mainFunctions = {
         clearDropNav : function(){
@@ -27,19 +29,34 @@
         },
 
         showDropNav : function(){
-          $('.drop-nav').css('display', 'block');
+          isVisible = true;
+          $('.drop-nav li').css('border-bottom', '1px solid #1abc9c');
+          $('.drop-nav li').css('height', '36px');
+          $('.drop-nav li').css('padding-top', '20px');
         },
 
         hideDropNav : function(){
-          $('.drop-nav').css('display', 'none');
+          isVisible = false;
+          $('.drop-nav li').animate({
+            padding : 0,
+            border : 0
+          },400);
+          $('.drop-nav li').css('height', '0px');
+
         }
     }
 
     //when the front end recieves the new notification
     socket.on('new notification', function(data){
+        console.log(isVisible);
         mainFunctions.hideNoNotificationStatus();
-        var item = '<li>' + data.notification + '</li>';     // item to be added to the list in the drop nav
-        $('.drop-nav li:eq(1)').before(item);
+        if(isVisible === true){   // nav drop is visibile
+          var item = '<li style = "height:36px;padding-top:20px;border-bottom:1px solid #1abc9c">' + data.notification + '</li>';     // item to be added to the list in the drop nav
+        }
+        else{
+          var item = '<li>' + data.notification + '</li>';
+        }
+        var str = $('.drop-nav li:eq(1)').before(item);
         var el = d.querySelector('.notification');
         var count = Number(el.getAttribute('data-count')) || 0;
         el.setAttribute('data-count', count + 1);
@@ -54,7 +71,6 @@
 
     $(d).ready(function(){
         var notificationButton = $('.notification'),
-            isVisible = false,
             $drop_nav = $('.drop-nav');
             // $drop_nav_head = $('#drop-nav-head span');
 
@@ -66,11 +82,9 @@
                 $('.notification').attr('data-count', 0);
                 socket.emit('change notification status');            // change the notification status to 'seen' at the backend
                 mainFunctions.showDropNav();
-                isVisible = true;
             }
             else{
                 mainFunctions.hideDropNav();
-                isVisible = false;
             }
         });
 
@@ -107,7 +121,6 @@
         $('body').click(function(){
             if(isVisible){
               mainFunctions.hideDropNav();
-              isVisible = false;
             }
         });
     });

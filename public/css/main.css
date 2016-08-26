@@ -1,4 +1,12 @@
-    body{
+/*
+*  abhishek goswami (hiro)
+*  abhishekg785@gmail.com
+*  github : abhishekg785
+*
+*  main.css
+*/
+
+  body{
 	    padding: 0px;
 	  	margin: 0px;
 	}
@@ -27,35 +35,41 @@
 		width: 280px;
 		left: -150px;
 		padding: 1px;
-		background-color: #7f8c8d;
+		/*background-color: #7f8c8d;*/
 		text-align: center;
-		display: none;
 		max-height: 500px;
 		overflow-y: auto;
 	}
 
-	.drop-nav> li {
+	.drop-nav > li {
 		height: 40px;
-		border-bottom: 1px solid #1abc9c;
+		/*border-bottom: 1px solid #1abc9c;*/
 		text-align: center;
-		padding-top: 20px;
+		/*padding-top: 20px;*/
 		font-family: sans-serif;
 		background-color:#ecf0f1;
 		color: #1abc9c;
 		font-size: 0.9em;
 		overflow-y: hidden;
 		cursor: pointer;
+    height: 0px;
+    transition: height 400ms ease;
+    width: 100%;
+    /*transition: padding 400ms ease;*/
 	}
+
+  .drop-nav  li:hover {
+  }
 
 	#drop-nav-head{
 		font-size: 0.95em;
 		background-color: #1abc9c;
 		color: white;
 		font-weight: bold;
-		padding-top: 15px;
+		/*padding-top: 15px;*/
 	}
-	/* Notifications */
 
+	/* Notifications */
 	.notification {
 	    display: inline-block;
 	    position: relative;
@@ -68,7 +82,7 @@
 	    /*border: 1px solid black;*/
 	}
 
-	.notification::before, 
+	.notification::before,
 	.notification::after {
 	    color: #fff;
 	    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
