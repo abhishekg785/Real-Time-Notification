@@ -3,7 +3,7 @@ Tech Stack Used :
   Node .js and Express at the server side
   Socket.io for creating Socket connections for real time stuff
   MongoDB and Mongoose for the database
-  HTML and CSS for the front end part
+  HTML5 and CSS3 for the front end part and for creating simple animations.
 
 
 Things to have installed for the project:
@@ -34,6 +34,8 @@ Steps to run the project:
 -----------------------------------------------NOTE----------------------------------------------------------
 If the project takes a lot time in creating random notification, just decrease the time factor variable, "timeFactor"
 in the file socket_module.js
+
+I have not worked a lot on the front-end part and all the animations are simple created entirely using simple HTML and CSS3.
 
 I have created the notification system keeping a single user in mind. i.e i have not maintained the
 user session for different user in the backend to differentiate the user's read/unread notification.
