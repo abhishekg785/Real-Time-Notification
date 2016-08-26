@@ -28,8 +28,12 @@ Steps to run the project:
   1) cd into the project and do " sudo npm install " to install all the dependencies.
   2) Run MongoDB.
   3) Now use command " node bin/www " to run the app.
-  4) The project will be running on port 3000, no go into the browser and type the url => localhost:3000
+  4) The project will be running on port 3000, no go into the browser and type the url => localhost:3000.
 
+
+-----------------------------------------------NOTE----------------------------------------------------------
+If the project takes a lot time in creating random notification, just decrease the time factor variable, "timeFactor"
+in the file socket_module.js
 
 I have created the notification system keeping a single user in mind. i.e i have not maintained the
 user session for different user in the backend to differentiate the user's read/unread notification.

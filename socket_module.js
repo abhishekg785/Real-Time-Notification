@@ -11,7 +11,7 @@ var shared_module = require('./shared_module');
 
 var timeMaxRange = 5,
     timeLowRange = 1,
-    timeFactor = 10000;  //to make it for ms
+    timeFactor = 10000;  //to make it for ms, decrease or increase to affect the rate of notification creation
 
 var socket_Functions = {
 
