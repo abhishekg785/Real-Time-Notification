@@ -18,6 +18,7 @@
 
     //when the front end recieves the new notification    
     socket.on('new notification', function(data){
+        $('#noNotiStatus').css('display', 'none');
         var item = '<li>' + data.notification + '</li>';
         $('.drop-nav li:eq(1)').before(item);
         var el = d.querySelector('.notification');
@@ -59,8 +60,6 @@
             else{
                 $drop_nav.css('display', 'none');
                 isVisible = false;
-                mainFunctions.clearDropNav();
-                $('.drop-nav').append('<li>No unread notifications Yet :)</li>');
             }
         });
 
@@ -86,7 +85,7 @@
             }
             else{
                 mainFunctions.clearDropNav();
-                var item = '<li>No unread Notifications Yet :)</li>';
+                var item = '<li id = "noNotiStatus">No unread Notifications Yet :)</li>';
                 $('.drop-nav').append(item);
             } 
         });
@@ -100,8 +99,6 @@
             if(isVisible){ 
               $drop_nav.css('display', 'none');
               isVisible = false;
-              mainFunctions.clearDropNav();
-              $('.drop-nav').append('<li>No unread Notifications Yet :)</li>');
             }
         });
     });
