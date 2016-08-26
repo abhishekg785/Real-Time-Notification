@@ -32,7 +32,7 @@
 	.drop-nav{
 		position: absolute;
 		list-style: none;
-		width: 280px;
+		width: 300px;
 		left: -150px;
 		padding: 1px;
 		/*background-color: #7f8c8d;*/
@@ -55,10 +55,13 @@
     height: 0px;
     transition: height 400ms ease;
     width: 100%;
+    overflow-x: hidden;
     /*transition: padding 400ms ease;*/
 	}
 
-  .drop-nav  li:hover {
+  .drop-nav  li:hover{
+    border-left: 1.5px solid black;
+    overflow-x: hidden;
   }
 
 	#drop-nav-head{

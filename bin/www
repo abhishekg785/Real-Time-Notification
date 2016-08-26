@@ -1,8 +1,12 @@
 #!/usr/bin/env node
 
-/**
- * Module dependencies.
- */
+/*
+*  abhishekg785@gmail.com
+*  abhishek goswami
+*  github : abhishekg785
+*
+*  www : file for creating the server and the socket instance for the app
+*/
 
 var express = require('express');
 var app = express();
@@ -22,9 +26,9 @@ app.set('port', port);
  */
 
 var server = http.createServer(app);
-/* 
-*  creating the socket object here 
-*  and then make the server listens to the pages having the websocket connection 
+/*
+*  creating the socket object here
+*  and then make the server listens to the pages having the websocket connection
 *  so we add the listen(server) to the socket object
 */
 var io = require('socket.io').listen(server);

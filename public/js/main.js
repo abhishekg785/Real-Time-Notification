@@ -3,7 +3,8 @@
 *   abhishekg785@gmail.com
 *   github : abhishekg785
 *
-*   main.js file
+*   main.js : file handles the fetching the notification from the backend at real time
+*   and populating the notis at front-end ,and for the similar kind of other stuff.
 */
 
 (function($, io, d){
@@ -48,7 +49,6 @@
 
     //when the front end recieves the new notification
     socket.on('new notification', function(data){
-        console.log(isVisible);
         mainFunctions.hideNoNotificationStatus();
         if(isVisible === true){   // nav drop is visibile
           var item = '<li style = "height:36px;padding-top:20px;border-bottom:1px solid #1abc9c">' + data.notification + '</li>';     // item to be added to the list in the drop nav
