@@ -1,7 +1,7 @@
 /*
 *   abhishek goswami
 *   abhishekg785@gmail.com
-*  
+*
 *   main.js file
 */
 
@@ -13,20 +13,37 @@
         clearDropNav : function(){
             $('.drop-nav').empty();
             $('.drop-nav').append("<li id = 'drop-nav-head'>Notifications</li>");
+        },
+
+        // to set the drop nav to none or no unread notifications left
+        setDropNavStatusToNone : function(){
+          mainFunctions.clearDropNav();
+          var item = '<li id = "noNotiStatus">No unread Notifications Yet :)</li>';
+          $('.drop-nav').append(item);
+        },
+
+        hideNoNotificationStatus : function(){
+          $('#noNotiStatus').css('display', 'none');
+        },
+
+        showDropNav : function(){
+          $('.drop-nav').css('display', 'block');
+        },
+
+        hideDropNav : function(){
+          $('.drop-nav').css('display', 'none');
         }
     }
 
-    //when the front end recieves the new notification    
+    //when the front end recieves the new notification
     socket.on('new notification', function(data){
-        $('#noNotiStatus').css('display', 'none');
-        var item = '<li>' + data.notification + '</li>';
+        mainFunctions.hideNoNotificationStatus();
+        var item = '<li>' + data.notification + '</li>';     // item to be added to the list in the drop nav
         $('.drop-nav li:eq(1)').before(item);
         var el = d.querySelector('.notification');
-        // var drop_nav_head = d.querySelector('#drop-nav-head span');
         var count = Number(el.getAttribute('data-count')) || 0;
         el.setAttribute('data-count', count + 1);
         el.classList.add('show-count');
-        // drop_nav_head.innerHTML = count + 1;
         el.classList.remove('notify');
         el.offsetWidth = el.offsetWidth;
         el.classList.add('notify');
@@ -47,18 +64,12 @@
                 $('.notification').removeClass('show-count');
                 var count = $('.notification').attr('data-count');
                 $('.notification').attr('data-count', 0);
-                socket.emit('change notification status');            // change the notification status to 'seen' at the backend 
-                $drop_nav.css('display', 'block');
-                // if(count){
-                //   $drop_nav_head.text(count);
-                // }
-                // else{
-                //   $drop_nav_head.text(0);
-                // }
+                socket.emit('change notification status');            // change the notification status to 'seen' at the backend
+                mainFunctions.showDropNav();
                 isVisible = true;
             }
             else{
-                $drop_nav.css('display', 'none');
+                mainFunctions.hideDropNav();
                 isVisible = false;
             }
         });
@@ -66,7 +77,7 @@
         //to initilalize the data with the no of unread notification
         socket.on('initialize data', function(data){
             /*
-            *  get the unread notification from the backend 
+            *  get the unread notification from the backend
             *  check the count if count > 0 : show the count ? do nothing at the moment
             *  populate the navbar with the unread notifications
             */
@@ -84,20 +95,18 @@
                 });
             }
             else{
-                mainFunctions.clearDropNav();
-                var item = '<li id = "noNotiStatus">No unread Notifications Yet :)</li>';
-                $('.drop-nav').append(item);
-            } 
+              mainFunctions.setDropNavStatusToNone();
+            }
         });
-          
-        //to synchronize all the other open tabs (will be uselful in case where user session will be created to keep the track of the users) 
+
+        //to synchronize all the other open tabs (will be uselful in case where user session will be created to keep the track of the users)
         // socket.on('update other tabs', function(){
         //     location.reload();
         // });
 
         $('body').click(function(){
-            if(isVisible){ 
-              $drop_nav.css('display', 'none');
+            if(isVisible){
+              mainFunctions.hideDropNav();
               isVisible = false;
             }
         });
