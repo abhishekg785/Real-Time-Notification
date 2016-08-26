@@ -9,7 +9,7 @@
 var NotificationModel = require('./models/notificationModel.js');
 var shared_module = require('./shared_module');
 
-var timeMaxRange = 2,
+var timeMaxRange = 5,
     timeLowRange = 1,
     timeFactor = 10000;  //to make it for ms
 
@@ -25,6 +25,8 @@ var socket_Functions = {
 module.exports = function(io){
 	io.sockets.on('connection', function(socket){
 
+		console.log('user connected');
+
 		/*
 		*  as soon as the user connects to the server , send him the track of the unread notifications
 		*  fetch the unseen notifivations from the user
@@ -32,7 +34,7 @@ module.exports = function(io){
 
 		//shared module contains all the general functions in use :) making the code modular
 		shared_module.getUnseenNotifications(function(data){
-			//get the data using callback
+			//get the unseen notifications using callback mechanism from the mongo db 
 			//emit the data
 			io.emit('initialize data', {'unseen_noti_count' : data.length, 'unseen_noti_arr' : data});
 		});
@@ -69,6 +71,11 @@ module.exports = function(io){
 		//change the notification seen status to true when the user has seen the notifications
 		socket.on('change notification status', function(){
 			shared_module.changeNotificationStatus();
+			socket.broadcast.emit('update other tabs');             // to synchronize the data in other tabs with the change in the current tab(useful when the user session)
+		});
+
+		socket.on('disconnect', function(){
+			console.log('user disconnected');
 		});
 	});
 }
