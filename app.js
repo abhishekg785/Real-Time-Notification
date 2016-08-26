@@ -1,4 +1,4 @@
-/* 
+/*
 *  author : abhishek goswami (hiro)
 *  abhishekg785@gmail.com
 *  github : abhishekg785
@@ -12,7 +12,6 @@ module.exports = function(app, io, express){
   var bodyParser = require('body-parser');
 
   var routes = require('./routes/index');
-  var users = require('./routes/users');
 
   // view engine setup
   app.set('views', path.join(__dirname, 'views'));
@@ -28,8 +27,7 @@ module.exports = function(app, io, express){
   app.use(express.static(path.join(__dirname, 'public')));
 
   app.use('/', routes);
-  app.use('/users', users);
-  
+
   //mongo db module to connect app to mongo db using mongoose
   var db_connect = require('./mongo_connect');
 
